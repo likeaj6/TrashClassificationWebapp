@@ -1,40 +1,21 @@
 import React, { Component } from 'react';
-import { ConnectedRouter } from 'react-router-redux'
-import { history } from './store/Store'
+import IntroSteps from './components/IntroSteps'
 import Routes from './routes'
+import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         loading: true
-    //     }
-    // }
-    // componentDidMount() {
-    //     fetch('/')
-    //     setTimeout(() => {
-    //         this.setState({
-    //             loading: false
-    //         })
-    //     }, 10000)
-    //       .then(res => res.json())
-    //       .then(users => this.setState({ users }));
-    // }
 
     render() {
         const {history} = this.props
         // console.log(history)
         const path = history.location.pathname
         return (
-            <div>
+            <main>
                 <Routes/>
-            </div>
+            </main>
         );
     }
-
-
 }
-
 
 export default App;

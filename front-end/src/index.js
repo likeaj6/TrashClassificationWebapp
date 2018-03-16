@@ -1,17 +1,16 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { ConnectedRouter } from 'react-router-redux'
+import React from 'react';
+import {render} from 'react-dom'
+import { ConnectedRouter } from 'react-router-redux';
 import configureStore from './store/Store'
+import App from './App';
 import { Provider } from 'react-redux'
-import Store, { history } from './store/Store'
-import App from './App'
-import Routes from './routes'
+import { history } from './store/Store'
+
+import './index.css';
+import 'semantic-ui-css/semantic.min.css';
+import registerServiceWorker from './registerServiceWorker';
 
 
-import './semantic/dist/semantic.min.css';
-import './index.css'
-
-const target = document.getElementById('root')
 const store = configureStore()
 
 render(
@@ -38,16 +37,4 @@ if (module.hot) {
     window.store = store;
 }
 
-//
-//
-//
-//
-//
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import './index.css';
-// import App from './App';
-// import registerServiceWorker from './registerServiceWorker';
-//
-// ReactDOM.render(<App />, document.getElementById('root'));
-// registerServiceWorker();
+registerServiceWorker();
