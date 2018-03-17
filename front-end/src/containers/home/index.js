@@ -4,6 +4,7 @@ import { Loader, Header, Image, Divider } from 'semantic-ui-react'
 import Logo from '../../logo';
 
 class Home extends Component {
+    
     render() {
         return (
             <div className="App">
@@ -17,9 +18,7 @@ class Home extends Component {
                     </div>
                 <section id='intro'>
                     <Logo className='logo'/>
-                    <Header as='h1' className="App-title">Welcome to Reflux</Header>
                 </section>
-
                 </header>
                 <div className="App-intro">
                     <IntroSteps />

@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Button, Segment, Container, Header, Divider, Card } from 'semantic-ui-react'
+import { Button, Segment, Container, Icon, Header, Divider, Card } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-function mapReimbursementStepsToComponent(step, index) {
+function mapStepsToCard(step, index) {
     const { key, icon, description, actions, title, to, link, style } = step
     // var cardHeight = height == null ? '24rem':height
     // var cardWidth = width == null ? '15rem':width
     var buttons = []
     actions.forEach((action, key) => {
-        buttons.push(<Button as='a' key={action+key} attached='bottom' color='teal' content={action}/>)
+        buttons.push(<Button key={action+key} icon={<Icon name={icon} size='large'/>} attached='bottom' color='teal'/>)
     })
     return (
             <Card
@@ -19,8 +19,9 @@ function mapReimbursementStepsToComponent(step, index) {
                 fluid
                 color='teal'
                 extra={buttons}
-                description={<Card.Description textAlign='center' content={description}/>}
-                header={<Header className='stepHeader' textAlign='center'>{title}<Divider/></Header>}
+                description={<Card.Description textAlign='center' content={<b>{actions[0]}</b>}/>}
+                header={<Header className='stepHeader' textAlign='center'>
+                {title}<Divider/></Header>}
             />
     );
 }
@@ -28,34 +29,35 @@ function mapReimbursementStepsToComponent(step, index) {
 const stepCards = [
     {
         key: 'download',
-        title: '1. Scan the trash',
+        icon: 'camera retro',
+        title: '1. Scan the trash below the camera',
         style: {
             color: '#4183c5'
         },
         to: '',
         description: '...',
-        actions: ['Hold your trash below our camera and sensors'],
+        actions: ['Hold your trash below our camera and sensors!'],
         index: '0'
     },
     {
         key: 'fill',
-        icon: 'address card outline',
+        icon: 'spinner',
         title: '2. Wait for our algorithms...',
         style: {
             color: '#4183c5'
         },
         to: '',
         description: '...',
-        actions: ['View Classification'],
+        actions: ['We identify and classify your item!'],
         index: '1'
     },
     {
         key: 'add',
-        icon: 'sitemap',
+        icon: 'undo',
         to: '#',
         title: '3. Tell us how we did!',
         description: '...',
-        actions: ['Make Correction'],
+        actions: ['Make a correction and help us improve!'],
         link: true,
         index: '2'
     }
@@ -83,11 +85,14 @@ class IntroSteps extends Component {
         const {isMobile} = this.state
         return (
             <div>
-                <Divider/>
-                <Header as='h2' content='How it works:' textAlign='center' />
+                <span />
+                <Header as='h2' textAlign='center'>
+                    <Icon style={{color:'#b9f4bc'}} name='recycle'/>
+                    How it works:
+                </Header>
                 <Segment>
                     <Card.Group itemsPerRow={isMobile ? '1':'3'}>
-                        {stepCards.map(mapReimbursementStepsToComponent)}
+                        {stepCards.map(mapStepsToCard)}
                     </Card.Group>
                 </Segment>
             </div>

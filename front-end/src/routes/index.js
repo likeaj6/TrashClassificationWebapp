@@ -5,11 +5,12 @@ import { Route} from 'react-router'
 import Home from '../containers/home'
 
 const routes = [
-  { path: '/',
+    {
+    path: '/',
     exact: true,
     sidebar: () => <div>Home</div>,
     main: () => <Home/>
-  }
+    },
 ]
 
 const Routes = () => {
