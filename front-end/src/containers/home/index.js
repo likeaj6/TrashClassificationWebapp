@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import IntroSteps from '../../components/IntroSteps'
 import { Loader, Header, Image, Divider } from 'semantic-ui-react'
-import logo from '../../logo.svg';
+import Logo from '../../logo';
 
 class Home extends Component {
     render() {
@@ -11,8 +11,8 @@ class Home extends Component {
                     <div class='stripes'>
                     </div>
                 <section id='intro'>
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <Header className="App-title">Welcome to Reflux</Header>
+                    <Logo className='logo'/>
+                    <Header as='h1' className="App-title">Welcome to Reflux</Header>
                 </section>
 
                 </header>

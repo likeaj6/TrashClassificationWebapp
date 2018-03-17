@@ -6,9 +6,9 @@
     height: 100px;
 } */
 
-.App-logo {
+.logo {
     animation: App-logo-spin infinite 3s cubic-bezier(.85,.01,.25, 1);
-    height: 100px;
+    height: 8em;
 }
 
  {
@@ -17,6 +17,14 @@
 }
 header {
  border-top:1px solid transparent
+}
+
+.stepHeader {
+    color: #7795f8 !important;
+}
+
+.stepCard {
+    background-color: #fafdfd !important;
 }
 
 .stripes {
@@ -63,12 +71,18 @@ header .stripes :nth-child(4) {
  }
 }
 
+h1 {
+    color: #FFFFFF !important;
+}
 
+h2 {
+    color: #FFFFFF !important;
+}
 
 #intro {
     position:relative;
     z-index:1;
-    padding-bottom:80px
+    padding-top:80px
 }
 
 .App-intro {
@@ -83,7 +97,7 @@ header .stripes :nth-child(4) {
 
 .button:hover {
   color: #7795f8;
-  transform: translateY(-1px);
+  transform: translateY(-3px);
   box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
 }
 

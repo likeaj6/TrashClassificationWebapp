@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Button, Segment, Header, Divider, Card } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 function mapReimbursementStepsToComponent(step, index) {
-    const { key, icon, description, actions, title, link, style } = step
+    const { key, icon, description, actions, title, to, link, style } = step
     // var cardHeight = height == null ? '24rem':height
     // var cardWidth = width == null ? '15rem':width
     var buttons = []
@@ -12,13 +13,15 @@ function mapReimbursementStepsToComponent(step, index) {
     return (
         <Segment fluid key={key+index}>
             <Card
-                className='StepCards'
+                className='stepCard'
                 raised
+                as={Link}
+                to={to}
                 fluid
                 color='teal'
                 extra={buttons}
                 description={<Card.Description textAlign='center' content={description}/>}
-                header={<Header textAlign='center'>{title}<Divider/></Header>}
+                header={<Header className='stepHeader' textAlign='center'>{title}<Divider/></Header>}
             />
         </Segment>
     );
@@ -31,6 +34,7 @@ const stepCards = [
         style: {
             color: '#4183c5'
         },
+        to: '',
         description: '...',
         actions: ['Hold your trash below our camera and sensors'],
         index: '0'
@@ -42,14 +46,15 @@ const stepCards = [
         style: {
             color: '#4183c5'
         },
+        to: '',
         description: '...',
         actions: ['View Classification'],
-        to: '/resources/chartering',
         index: '1'
     },
     {
         key: 'add',
         icon: 'sitemap',
+        to: '#',
         title: '3. Tell us how we did!',
         description: '...',
         actions: ['Make Correction'],
