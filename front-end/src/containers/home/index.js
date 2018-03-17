@@ -9,6 +9,11 @@ class Home extends Component {
             <div className="App">
                 <header>
                     <div class='stripes'>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
+                        <span/>
                     </div>
                 <section id='intro'>
                     <Logo className='logo'/>

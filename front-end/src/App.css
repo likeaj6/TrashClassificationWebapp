@@ -2,21 +2,13 @@
     text-align: center;
 }
 
-/* .App-logo {
-    height: 100px;
-} */
-
 .logo {
     animation: App-logo-spin infinite 3s cubic-bezier(.85,.01,.25, 1);
-    height: 8em;
+    height: 6em;
 }
 
- {
- position:relative;
- display:block
-}
 header {
- border-top:1px solid transparent
+ border-top: 1px solid transparent
 }
 
 .stepHeader {
@@ -27,41 +19,71 @@ header {
     background-color: #fafdfd !important;
 }
 
+.ui.horizontal.segments.equal.width > .ui.segment {
+    flex-grow:1;
+    width:0;
+}
+
 .stripes {
     position:absolute;
     z-index:-1;
     width:100%;
     top: 0;
     display: grid;
-    grid: repeat(5, 200px) / repeat(5, 1fr);
+    grid: repeat(5, 5em) / repeat(5, 1fr);
     /* background:linear-gradient(#50a6b1,#709dc7 10%,#e4dcf5 38%,#eaf2f9 48%,#f6f9fc 62%); */
     /* background-color: #47ccaf; */
-    background:linear-gradient(150deg,#53f 15%,#05d5ff 70%,#a6ffcb 94%);
+    background:linear-gradient(150deg,#53f 10%,#05d5ff 70%,#a6ffcb 94%);
+    /* background:linear-gradient(150deg,#53f 15%,#05d5ff 70%,#a6ffcb 94%); */
     transform: skewY(-12deg);
     transform-origin: 0;
 }
 
 header .stripes :nth-child(1) {
- grid-column:span 3;
- /* background:linear-gradient(100grad,rgba(243,251,255,.4),rgba(243,251,255,.15) 20%,rgba(243,251,255,0)) */
+    grid-column:span 2;
+    background:linear-gradient(100grad,rgba(218, 205, 255, 0.4),rgba(243,251,255,.15) 20%,rgba(243,251,255,0))
 }
 header .stripes :nth-child(2) {
- grid-area:3/span 3/auto/-1
+    grid-row: 2/span 1;
+    grid-column: 2/span 4;
+    background:linear-gradient(100grad,rgba(0,119,204,0),rgba(0,119,204,.05) 40%,rgba(0,119,204,.35));
 }
 header .stripes :nth-child(3) {
- grid-row:4;
- grid-column:span 5
+    grid-row:5;
+    grid-column: 1;
+    /* background:linear-gradient(100grad,rgba(0,119,204,0),rgba(0,119,204,.05) 40%,rgba(0,119,204,.35)); */
+    background: #1da4ff;
+    /* background:linear-gradient(100grad,#fff 50%,hsla(0,0%,100%,0)); */
 }
 header .stripes :nth-child(4) {
- grid-area:4/span 5/auto/-1
+    grid-row: 4/span 1;
+    grid-column: 1/span 2;
+    background:linear-gradient(100grad,rgba(0,119,204,0),rgba(0,119,204,.05) 40%,rgba(0,119,204,.00));
 }
 header .stripes :nth-child(5) {
- grid-area:auto/1/-1/-1;
- background:linear-gradient(100grad,#fff 80%,#f5fafd)
+    grid-row:5;
+    grid-column:5;
+    background: #a6ffcb;
+ /* grid-area:auto/1/-1/-1;
+ background:linear-gradient(1/00grad,rgba(0,119,204,0) 10%,rgba(0,119,204,.05)); */
 }
-@media (min-width:670px) {
- header .stripes :nth-child(2) {
-  background:linear-gradient(100grad,rgba(0,119,204,0),rgba(0,119,204,.05) 40%,rgba(0,119,204,.35))
+@media (min-width:800px) {
+    .stripes {
+        grid: repeat(5, 200px) / repeat(5, 1fr);
+    }
+    .App-intro {
+        margin-left: 25% !important;
+        margin-right: 25% !important;
+    }
+    .logo {
+        height: 10em;
+    }
+    #intro {
+        padding-top: 7em;
+    }
+    header .stripes :nth-child(2) {
+    background:linear-gradient(100grad,rgba(0,119,204,0),rgba(0,119,204,.05) 40%,rgba(0,119,204,.35))
+
  }
 header .stripes :nth-child(3) {
   background:linear-gradient(100grad,#fff 50%,hsla(0,0%,100%,0))
@@ -72,6 +94,7 @@ header .stripes :nth-child(4) {
 }
 
 h1 {
+    margin-top: 0.5em !important;
     color: #FFFFFF !important;
 }
 
@@ -82,7 +105,7 @@ h2 {
 #intro {
     position:relative;
     z-index:1;
-    padding-top:80px
+    padding-top: 1em;
 }
 
 .App-intro {
@@ -91,8 +114,8 @@ h2 {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: large;
-    margin-left: 25%;
-    margin-right: 25%;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .button:hover {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Segment, Header, Divider, Card } from 'semantic-ui-react'
+import { Button, Segment, Container, Header, Divider, Card } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 function mapReimbursementStepsToComponent(step, index) {
@@ -11,7 +11,6 @@ function mapReimbursementStepsToComponent(step, index) {
         buttons.push(<Button as='a' key={action+key} attached='bottom' color='teal' content={action}/>)
     })
     return (
-        <Segment fluid key={key+index}>
             <Card
                 className='stepCard'
                 raised
@@ -23,7 +22,6 @@ function mapReimbursementStepsToComponent(step, index) {
                 description={<Card.Description textAlign='center' content={description}/>}
                 header={<Header className='stepHeader' textAlign='center'>{title}<Divider/></Header>}
             />
-        </Segment>
     );
 }
 
@@ -66,7 +64,7 @@ const stepCards = [
 class IntroSteps extends Component {
     constructor(props) {
         super(props);
-        this.state = { isMobile: window.innerWidth <= 1000}
+        this.state = { isMobile: window.innerWidth < 800}
         this.resize = this.resize.bind(this)
     }
     componentDidMount() {
@@ -79,7 +77,7 @@ class IntroSteps extends Component {
     }
 
     resize() {
-        this.setState({isMobile: window.innerWidth <= 1000});
+        this.setState({isMobile: window.innerWidth < 800});
     }
     render() {
         const {isMobile} = this.state
@@ -87,9 +85,11 @@ class IntroSteps extends Component {
             <div>
                 <Divider/>
                 <Header as='h2' content='How it works:' textAlign='center' />
-                <div>
-                    {stepCards.map(mapReimbursementStepsToComponent)}
-                </div>
+                <Segment>
+                    <Card.Group itemsPerRow={isMobile ? '1':'3'}>
+                        {stepCards.map(mapReimbursementStepsToComponent)}
+                    </Card.Group>
+                </Segment>
             </div>
         )
     }
