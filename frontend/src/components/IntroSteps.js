@@ -15,6 +15,7 @@ function mapStepsToCard(step, index) {
                 className='stepCard'
                 raised
                 as={Link}
+                key={key}
                 to={to}
                 fluid
                 color='teal'

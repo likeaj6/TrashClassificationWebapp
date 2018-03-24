@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Segment, Container, Progress, Icon, Header, Divider, Loader, Card } from 'semantic-ui-react'
+import { Segment, Progress, Button, Icon, Header, Loader } from 'semantic-ui-react'
 
 const steps = [
     {icon: 'crop', text: 'Preprocessing image for machine learning...'},
@@ -25,14 +25,35 @@ class ClassificationProgress extends Component {
             })
         }, 500)
         this.resize();
-        var handle = setInterval(this.incrementProgress, 2000);
+        var handle = setInterval(this.getUpdate, 2000);
         this.setState({
             handle: handle
         })
     }
 
+    getUpdate = () => {
+        this.callApi()
+            .then(res => {
+                console.log('update: ', res.progress)
+                // console.log('current: ', this.state.percent)
+                if (res.progress > this.state.percent/25) {
+                    this.incrementProgress()
+                }
+            })
+            .catch(err => console.log(err));
+    }
+
+    callApi = async () => {
+        const response = await fetch('/client/progress/test');
+        const body = await response.json();
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };
+
     incrementProgress() {
-        if (this.state.percent == 100) {
+        if (this.state.percent === 100) {
             clearInterval(this.state.handle)
         } else {
             this.setState({
@@ -40,6 +61,23 @@ class ClassificationProgress extends Component {
             })
         }
     }
+
+    updateProgress = async () => {
+        const response = await fetch(`/pi/update/test?progress=${(this.state.percent)/25+1}`);
+        const body = await response.json();
+        alert('sending detected')
+
+        if (response.status !== 200) throw Error(body.message);
+
+        return body;
+    };
+
+    handleOnClick = () => {
+        this.updateProgress()
+            .then(res => {
+            })
+            .catch(err => console.log(err));
+    };
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.resize);
@@ -69,6 +107,7 @@ class ClassificationProgress extends Component {
                         <Icon size='large' name={currentStep.icon}/>
                         {currentStep.text}
                     </Progress>
+                    <Button content='Increment Progress!' onClick={this.handleOnClick}/>
                 </Segment>
             </div>
         )

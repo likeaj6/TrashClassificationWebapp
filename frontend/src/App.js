@@ -9,12 +9,13 @@ class App extends Component {
 
     render() {
         const {history} = this.props
+        console.log(history)
         // console.log(history)
         const path = history.location.pathname
         return (
             <main className='App'>
                 <HeaderBanner/>
-                <Routes/>
+                <Routes history={history}/>
             </main>
         );
     }

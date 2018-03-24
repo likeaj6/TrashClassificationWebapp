@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Segment, Container, Progress, Icon, Header, Divider, Loader, Card } from 'semantic-ui-react'
+import { Segment, Icon, Header, Loader } from 'semantic-ui-react'
 // import getUserMedia from 'getusermedia'
-import { Link } from 'react-router-dom'
 
 class WebCam extends Component {
     constructor(props) {
