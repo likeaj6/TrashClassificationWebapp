@@ -5,6 +5,7 @@ import { Route} from 'react-router'
 import Home from '../containers/home'
 import Livestream from '../containers/livestream'
 import ClassificationProgress from '../containers/progress'
+import Feedback from '../containers/feedback'
 
 const routes = [
     {
@@ -24,6 +25,12 @@ const routes = [
     exact: true,
     sidebar: () => <div>Progress</div>,
     main: () => <ClassificationProgress/>
+    },
+    {
+    path: '/feedback',
+    exact: true,
+    sidebar: () => <div>Feedback</div>,
+    main: () => <Feedback/>
     },
 ]
 

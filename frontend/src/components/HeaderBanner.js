@@ -1,4 +1,4 @@
-import Logo from '../logo'
+import Logo from '../assets/logo'
 import React, { Component } from 'react';
 
 const HeaderBanner = () => {

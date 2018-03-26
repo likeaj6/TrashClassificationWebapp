@@ -71,7 +71,7 @@ const stepCards = [
 class IntroSteps extends Component {
     constructor(props) {
         super(props);
-        this.state = { isMobile: window.innerWidth < 800}
+        this.state = { isMobile: window.innerWidth < 799}
         this.resize = this.resize.bind(this)
     }
     componentDidMount() {
@@ -84,14 +84,14 @@ class IntroSteps extends Component {
     }
 
     resize() {
-        this.setState({isMobile: window.innerWidth < 800});
+        this.setState({isMobile: window.innerWidth < 799});
     }
     render() {
         const {isMobile} = this.state
         return (
             <div>
                 <span />
-                <Header as='h2' textAlign='center'>
+                <Header className='introHeader' as='h2' textAlign='center'>
                     <Icon style={{color:'#b9f4bc'}} name='recycle'/>
                     How it works:
                 </Header>

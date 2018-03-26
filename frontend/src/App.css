@@ -15,7 +15,11 @@ header {
     color: #6772e4 !important;
 }
 
-.camera {
+.swalTitle {
+    color: #000 !important;
+}
+
+#camera {
     width: 300px;
     height: 200px;
 }
@@ -71,7 +75,7 @@ header .stripes :nth-child(5) {
  /* grid-area:auto/1/-1/-1;
  background:linear-gradient(1/00grad,rgba(0,119,204,0) 10%,rgba(0,119,204,.05)); */
 }
-@media (min-width:800px) {
+@media (min-width:801px) {
     .stripes {
         grid: repeat(5, 200px) / repeat(5, 1fr);
     }
@@ -87,14 +91,11 @@ header .stripes :nth-child(5) {
     }
 }
 
-h1 {
+.introHeader {
     margin-top: 0.5em !important;
     color: #FFFFFF !important;
 }
 
-h2 {
-    color: #FFFFFF !important;
-}
 
 #intro {
     position:relative;
