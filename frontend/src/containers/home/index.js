@@ -27,7 +27,7 @@ class Home extends Component {
     awaitAction = () => {
         this.callApi()
             .then(res => {
-                // console.log(res.detected)
+                console.log(res.detected)
                 if (res.detected) {
                     this.props.objectDetected('stream')
                     clearInterval(this.state.handle)
@@ -37,7 +37,7 @@ class Home extends Component {
     }
 
     callApi = async () => {
-        const response = await fetch('/client/standby/test');
+        const response = await fetch('https://tricycle-backend.herokuapp.com/client/standby/test');
         const body = await response.json();
 
         if (response.status !== 200) throw Error(body.message);
@@ -46,7 +46,7 @@ class Home extends Component {
     };
 
     motionDetected = async () => {
-        const response = await fetch('/pi/detected/test');
+        const response = await fetch('https://tricycle-backend.herokuapp.com/pi/detected/test');
         const body = await response.json();
 
         if (response.status !== 200) throw Error(body.message);

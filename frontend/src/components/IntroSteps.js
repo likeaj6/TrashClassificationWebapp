@@ -41,27 +41,51 @@ const stepCards = [
         index: '0'
     },
     {
-        key: 'fill',
-        icon: 'spinner',
-        title: '2. Wait for our algorithms...',
+        key: 'train',
+        icon: 'line chart',
+        title: '2. Train the system!',
         style: {
             color: '#4183c5'
         },
         to: '',
         description: '...',
-        actions: ['We identify and classify your item!'],
+        actions: ['Tell us where the trash should go by pushing the corresponding button after the image is taken!'],
         index: '1'
     },
     {
-        key: 'add',
-        icon: 'undo',
-        to: '#',
-        title: '3. Tell us how we did!',
+        key: 'future',
+        icon: 'spinner',
+        title: '3. Coming very soon!',
+        style: {
+            color: '#4183c5'
+        },
+        to: '',
         description: '...',
-        actions: ['Make a correction and help us improve!'],
-        link: true,
+        actions: ['The system will improve and automatically tell you where the trash should go!'],
         index: '2'
     }
+    // {
+    //     key: 'fill',
+    //     icon: 'spinner',
+    //     title: '2. Wait for our algorithms...',
+    //     style: {
+    //         color: '#4183c5'
+    //     },
+    //     to: '',
+    //     description: '...',
+    //     actions: ['We identify and classify your item!'],
+    //     index: '1'
+    // },
+    // {
+    //     key: 'add',
+    //     icon: 'undo',
+    //     to: '#',
+    //     title: '3. Tell us how we did!',
+    //     description: '...',
+    //     actions: ['Make a correction and help us improve!'],
+    //     link: true,
+    //     index: '2'
+    // }
 ]
 
 // const mapDispatchToProps = dispatch => bindActionCreators({

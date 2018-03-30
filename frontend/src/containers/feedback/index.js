@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     }
 }, dispatch)
 
-const backgroundColors = {'trash': '#fff4e7', 'recycle': '#dbf2ff', 'compost':'#ecfee8'}
+const backgroundColors = {'trash': '#ffd7a8', 'recycle': '#dbf2ff', 'compost':'#b6ffa6'}
 
 class Feedback extends Component {
     constructor(props) {
@@ -32,12 +32,24 @@ class Feedback extends Component {
         this.state = {
             response: ''
         };
+        this.clearHandles = this.clearHandles.bind(this)
+    }
+
+    clearHandles() {
+        // alert('clearing handles!!')
+        clearInterval(this.state.intervalHandle)
+        clearTimeout(this.state.timeoutHandle);
     }
 
     componentDidMount() {
-        var handle = setInterval(this.awaitAction, 1000);
+        var intervalHandle = setInterval(this.awaitAction, 1000);
+        var timeoutHandle = setTimeout(() => {
+            // alert('TIMING OUT')
+            this.props.errorOccurred('')
+        }, 10000)
         this.setState({
-            handle: handle
+            timeoutHandle: timeoutHandle,
+            intervalHandle: intervalHandle
         })
         if (this.props.image == null) {
             swal({
@@ -47,19 +59,18 @@ class Feedback extends Component {
                 showConfirmButton: false,
                 timer: 2000
             }).then((result) => {
+                this.clearHandles()
+                // alert('TIMING OUT')
                 this.props.errorOccurred('')
             })
         }
-        setTimeout(() => {
-            clearInterval(this.state.handle)
-            this.props.feedbackReceived('')
-        }, 10000)
+
     }
 
     awaitAction = () => {
         this.callApi()
             .then(res => {
-                // console.log(res.userClassification)
+                console.log(res.userClassification)
                 if (res.userClassification) {
                     swal({
                         titleText: res.userClassification,
@@ -70,17 +81,20 @@ class Feedback extends Component {
                         html: `<b>Thank you for your help!</b>`,
                         type:'success',
                         showConfirmButton: false,
-                        timer: 10000
+                        timer: 2000
                     })
-                    clearInterval(this.state.handle)
+                    this.clearHandles()
                     this.props.feedbackReceived('')
                 }
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                this.clearHandles()
+                console.log(err)
+            });
     }
 
     callApi = async () => {
-        const response = await fetch('/client/feedback/test');
+        const response = await fetch('https://tricycle-backend.herokuapp.com/client/feedback/test');
         const body = await response.json();
 
         if (response.status !== 200) throw Error(body.message);
@@ -90,7 +104,7 @@ class Feedback extends Component {
 
     buttonPushed = async (buttonPushed) => {
         // console.log(buttonPushed)
-        const response = await fetch(`/pi/feedback/test?classifiction=${buttonPushed}`);
+        const response = await fetch(`https://tricycle-backend.herokuapp.com/pi/feedback/test?classification=${buttonPushed}`);
         const body = await response.json()
         if (response.status !== 200) throw Error(body.message);
 
@@ -107,7 +121,22 @@ class Feedback extends Component {
 
     render() {
         const image = this.props.image
-        const content = image != null ? <Segment><Image inline id="trash_image" src={image}/></Segment> : null
+        const imageSegment = image != null ? <Segment><Image inline id="trash_image" src={image}/></Segment> : null
+        const headerText = <Header as='h3' textAlign='center'>
+            Please press the corresponding button on the trash can!
+        </Header>
+        const buttons =
+        <Button.Group vertical>
+            <Button fluid color='brown' icon={<Trash id='trash'/>}content='Trash' onClick={this.handleOnClick}/>
+            <Button fluid color='blue' icon={<Recycle id='recycle'/>} content='Recycle' onClick={this.handleOnClick}/>
+            <Button fluid color='green' icon={<Compost id='compost'/>} content='Compost' onClick={this.handleOnClick}/>
+        </Button.Group>
+        const content = <Segment.Group horizontal>
+        <Segment>
+            {imageSegment}
+        </Segment>
+        <Segment>{headerText}{buttons}</Segment>
+        </Segment.Group>
         return (
             <div className="App-intro">
                 <Header className='introHeader' as='h2' textAlign='center'>
@@ -115,15 +144,7 @@ class Feedback extends Component {
                     Where should this go?
                 </Header>
                 {content}
-                <Header as='h3' textAlign='center'>
-                    Please press the corresponding button!
-                </Header>
-                <Trash id='trash'/>
-                <Button content='Trash' onClick={this.handleOnClick}/>
-                <Recycle id='recycle'/>
-                <Button content='Recycle' onClick={this.handleOnClick}/>
-                <Compost id='compost'/>
-                <Button content='Compost' onClick={this.handleOnClick}/>
+
             </div>
         );
     }

@@ -46,12 +46,12 @@ class Livestream extends Component {
 
     startCountdown() {
         setTimeout(() => {
-            var handle = setInterval(this.decrementCountdown, 500);
+            var handle = setInterval(this.decrementCountdown, 400);
             this.setState({
                 loading: false,
                 handle: handle
             })
-        }, 600)
+        }, 250)
     }
 
     decrementCountdown() {
@@ -81,6 +81,20 @@ class Livestream extends Component {
 
     capture() {
         const imageSrc = this.state.webcam.getScreenshot();
+        const request = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                'image': imageSrc
+            })
+        }
+        fetch('https://tricycle-backend.herokuapp.com/client/images/test', request)
+        .then(() => {
+
+        })
         this.imageSrc = imageSrc
         setTimeout(() => {
             this.pushNextView()

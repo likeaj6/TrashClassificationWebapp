@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.215.1",
     "getusermedia": "^2.0.1",
     "history": "^4.7.2",
     "react": "^16.2.0",
