@@ -45,6 +45,23 @@ class Feedback extends Component {
         var intervalHandle = setInterval(this.awaitAction, 1000);
         var timeoutHandle = setTimeout(() => {
             // alert('TIMING OUT')
+            const request = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    image: this.props.image,
+                })
+            }
+            console.log('Sending image')
+            fetch('https://tricycle-backend.herokuapp.com/client/images/test', request)
+            .then(() => {
+                console.log('Sent image 1')
+            })
+            console.log('Sent image 2')
+            this.clearHandles()
             this.props.errorOccurred('')
         }, 10000)
         this.setState({
@@ -72,6 +89,23 @@ class Feedback extends Component {
             .then(res => {
                 console.log(res.userClassification)
                 if (res.userClassification) {
+                    const request = {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            image: this.props.image,
+                            classification: res.userClassification
+                        })
+                    }
+                    console.log('Sending image')
+                    fetch('https://tricycle-backend.herokuapp.com/client/images/test', request)
+                    .then(() => {
+                        console.log('Sent image 1')
+                    })
+                    console.log('Sent image 2')
                     swal({
                         titleText: res.userClassification,
                         imageUrl: 'https://s3.amazonaws.com/classificationwebapp/assets/' + res.userClassification.toLowerCase()+ '.svg',

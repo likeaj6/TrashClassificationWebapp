@@ -81,20 +81,6 @@ class Livestream extends Component {
 
     capture() {
         const imageSrc = this.state.webcam.getScreenshot();
-        const request = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                'image': imageSrc
-            })
-        }
-        fetch('https://tricycle-backend.herokuapp.com/client/images/test', request)
-        .then(() => {
-
-        })
         this.imageSrc = imageSrc
         setTimeout(() => {
             this.pushNextView()

@@ -62,10 +62,10 @@ class Home extends Component {
     };
 
     render() {
+        // <Button content='Motion Detected!' onClick={this.handleOnClick}/>
         return (
             <div className="App-intro">
                 <IntroSteps />
-                <Button content='Motion Detected!' onClick={this.handleOnClick}/>
             </div>
         );
     }

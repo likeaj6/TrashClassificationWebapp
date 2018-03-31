@@ -95,7 +95,7 @@ const stepCards = [
 class IntroSteps extends Component {
     constructor(props) {
         super(props);
-        this.state = { isMobile: window.innerWidth < 799}
+        this.state = { isMobile: window.innerWidth < 801}
         this.resize = this.resize.bind(this)
     }
     componentDidMount() {
@@ -108,7 +108,7 @@ class IntroSteps extends Component {
     }
 
     resize() {
-        this.setState({isMobile: window.innerWidth < 799});
+        this.setState({isMobile: window.innerWidth < 801});
     }
     render() {
         const {isMobile} = this.state
@@ -120,7 +120,7 @@ class IntroSteps extends Component {
                     How it works:
                 </Header>
                 <Segment>
-                    <Card.Group itemsPerRow={isMobile ? '1':'3'}>
+                    <Card.Group itemsPerRow='3'>
                         {stepCards.map(mapStepsToCard)}
                     </Card.Group>
                 </Segment>

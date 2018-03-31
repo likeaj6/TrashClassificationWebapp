@@ -75,7 +75,7 @@ header .stripes :nth-child(5) {
  /* grid-area:auto/1/-1/-1;
  background:linear-gradient(1/00grad,rgba(0,119,204,0) 10%,rgba(0,119,204,.05)); */
 }
-@media (min-width:801px) {
+@media (min-width:802px) {
     .stripes {
         grid: repeat(5, 200px) / repeat(5, 1fr);
     }
