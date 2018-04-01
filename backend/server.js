@@ -2,6 +2,8 @@ const express = require('express');
 const fetch = require('node-fetch')
 const AWS = require('aws-sdk');
 const moment = require('moment')
+var GoogleSpreadsheet = require('google-spreadsheet');
+const spreadsheet = require('./spreadsheets')
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000;
@@ -22,6 +24,23 @@ const corsOptions = {
     "allowedHeaders": ['Origin, X-Requested-With, Content-Type, Accept'],
     "credentials": true
 }
+var doc = new GoogleSpreadsheet(process.env.SPREADSHEET_ID);
+var sheet;
+var creds_json = {
+    client_email: process.env.SHEETS_CLIENT_EMAIL,
+    private_key: process.env.SHEETS_PRIVATE_KEY
+}
+
+doc.useServiceAccountAuth(creds_json, function() {
+    console.log("authenticated")
+    doc.getInfo(function(err, info) {
+        console.log(info)
+        console.log('Loaded doc: '+ info);
+        sheet = info.worksheets[0];
+        console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
+    });
+    console.log(doc)
+});
 
 app.use(cors(corsOptions));
 
@@ -45,8 +64,9 @@ app.post('/client/images/:id', (req, res) => {
     console.log('!!!!RECEIVED IMAGE!!!!')
     var buf = new Buffer(req.body.image.replace(/^data:image\/\w+;base64,/, ""),'base64')
     var imageUri = 'data:image/png;base64,' + req.body.image;
-
-    var dateTimeString = moment().format()
+    var dateTime = moment()
+    var unixTimestamp = dateTime.unix()
+    var dateTimeString = dateTime.format()
     //
     // console.log('FETCHING IMAGE URI')
     // fetch(imageUri).then(function(res){
@@ -77,6 +97,15 @@ app.post('/client/images/:id', (req, res) => {
             timestamp: dateTimeString,
             id: req.params.id,
             classification: classification
+        })
+    }
+    if (sheet) {
+        console.log('adding new row to spreadsheet')
+        sheet.addRow({'Timestamp': unixTimestamp, 'Trash Can Id': req.params.id, 'Input': classification}, (error, row) => {
+            if (error) {
+                console.log('error: ' + error)
+            }
+            console.log('new row:', row)
         })
     }
 
