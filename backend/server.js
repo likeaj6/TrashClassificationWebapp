@@ -54,18 +54,36 @@ app.post('/client/images/:id', (req, res) => {
     //     return res.blob()
     // }).then(function(image){
     //     console.log('putting object in bucket')
-    var classification = 'Unlabeled/'
+    var classification = 'Unlabeled'
     if (req.body.classification) {
-        classification = req.body.classification + '/'
+        classification = req.body.classification + ''
     }
 
 
     var data = {
-        Key: 'images/' + classification + dateTimeString,
+        Key: 'images/' + classification + '/' + dateTimeString,
         Body: buf,
         ContentEncoding: 'base64',
         ContentType: 'image/jpeg'
     };
+
+    const zapierRequest = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            timestamp: dateTimeString,
+            id: req.params.id,
+            classification: classification
+        })
+    }
+
+    fetch('https://hooks.zapier.com/hooks/catch/2164035/kpafvx/', zapierRequest)
+
+
+    fetch('https://hooks.zapier.com/hooks/catch/2164035/kpam3c/', zapierRequest)
 
     s3Bucket.putObject(data, function(err, data){
         if (err) {
