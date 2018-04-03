@@ -46,7 +46,7 @@ class Livestream extends Component {
 
     startCountdown() {
         setTimeout(() => {
-            var handle = setInterval(this.decrementCountdown, 400);
+            var handle = setInterval(this.decrementCountdown, 700);
             this.setState({
                 loading: false,
                 handle: handle

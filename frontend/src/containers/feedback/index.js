@@ -9,9 +9,10 @@ import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import { bindActionCreators } from 'redux'
 
+
 const mapStateToProps = (state) => {
     return {
-        image: state.image
+        image: state.image,
     }
 }
 
@@ -21,7 +22,8 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     },
     errorOccurred: () => {
         return push('/')
-    }
+    },
+
 }, dispatch)
 
 const backgroundColors = {'trash': '#ffd7a8', 'recycle': '#dbf2ff', 'compost':'#b6ffa6'}

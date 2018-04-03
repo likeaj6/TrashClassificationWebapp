@@ -24,6 +24,15 @@ header {
     height: 200px;
 }
 
+#counter {
+    text-align: left;
+    margin-left: 3%;
+    color: #FFF;
+    position: absolute;
+    top: 3.5%;
+    font-size: 1.5rem;
+}
+
 .loading-header {
     color: #000 !important;
 }
@@ -49,6 +58,7 @@ header {
 
 header .stripes :nth-child(1) {
     grid-column:span 2;
+    color: #FFF;
     background:linear-gradient(100grad,rgba(218, 205, 255, 0.4),rgba(243,251,255,.15) 20%,rgba(243,251,255,0))
 }
 header .stripes :nth-child(2) {
