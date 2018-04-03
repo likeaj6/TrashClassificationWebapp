@@ -31,6 +31,8 @@ var creds_json = {
     private_key: process.env.SHEETS_PRIVATE_KEY
 }
 
+var dataCount;
+
 doc.useServiceAccountAuth(creds_json, function() {
     console.log("authenticated")
     doc.getInfo(function(err, info) {
@@ -38,9 +40,11 @@ doc.useServiceAccountAuth(creds_json, function() {
         console.log('Loaded doc: '+ info);
         sheet = info.worksheets[0];
         console.log('sheet 1: '+sheet.title+' '+sheet.rowCount+'x'+sheet.colCount);
+        dataCount = sheet.rowCount
     });
     console.log(doc)
 });
+
 
 app.use(cors(corsOptions));
 
@@ -81,7 +85,7 @@ app.post('/client/images/:id', (req, res) => {
 
 
     var data = {
-        Key: 'images/' + classification + '/' + dateTimeString,
+        Key: 'images/' + classification + '/' + dateTimeString + '.png',
         Body: buf,
         ContentEncoding: 'base64',
         ContentType: 'image/jpeg'
@@ -101,7 +105,7 @@ app.post('/client/images/:id', (req, res) => {
     }
     if (sheet) {
         console.log('adding new row to spreadsheet')
-        sheet.addRow({'Timestamp': unixTimestamp, 'Trash Can Id': req.params.id, 'Input': classification}, (error, row) => {
+        sheet.addRow({'Timestamp': unixTimestamp, 'Trash Can Id': 'sci-commons-1', 'Input': classification}, (error, row) => {
             if (error) {
                 console.log('error: ' + error)
             }
@@ -130,7 +134,8 @@ app.get('/client/feedback/:id', (req, res) => {
     // while (!detected) {
     //     continue
     // }
-    res.send({ userClassification: app.locals.trashCanId[req.params.id]['userClassification']});
+    dataCount += 1;
+    res.send({ userClassification: app.locals.trashCanId[req.params.id]['userClassification'], dataCount: dataCount});
     app.locals.trashCanId[req.params.id]['userClassification'] = false
 });
 
